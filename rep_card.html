@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reports For U</title>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<button id="home" onclick="home();" class="glyphicon glyphicon-home btn btn-warning">Home</button>
+<button id="logout" onclick="logout();" class="glyphicon glyphicon-log-out btn btn-danger">Logout</button>
+<div class="container">
+	<center>
+		<h1 id="repName" class="header">		
+		</h1>
+		<div class="subject" id="english">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">English</label>
+			<input type="number" id="engMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeEng">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="maths"  style="margin-left: 10px; margin-right: 10px;">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Maths</label>
+			<input type="number" id="mathsMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeMaths">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+		
+			</div>
+		</div>
+		<div class="subject" id="mfl">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">MFL</label>
+			<input type="number" id="MFLMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeMFL">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="hindi">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Hindi</label>
+			<input type="number" id="hindiMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeHindi">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="science"  style="margin-right: 10px; margin-left: 10px;">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Science</label>
+			<input type="number" id="scienceMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeScience">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="his">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">History/Civics</label>
+			<input type="number" id="hisMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeHis">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="geo">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Geography</label>
+			<input type="number" id="geoMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeGeo">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			
+			
+			</div>
+		</div>
+		<div class="subject" id="theory" style="margin-left: 10px; margin-right: 10px;">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">ICT Theory</label>
+			<input type="number" id="theoryMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradeTheory">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+
+			</div>
+		</div>
+		<div class="subject" id="practical">
+			
+			<label style="margin-top: 5px; font-size: 25px; font-weight: 600; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">ICT Practical</label>
+			<input type="number" id="practicalMarks" class="form-control marks" placeholder="Overall Marks">
+			
+			
+			<label style="margin-top: 5px; font-size: 18px; margin-right: 10px; display: inline-block; margin-bottom: 10px;">Grade</label>
+			<select id="gradePracticals">
+				<option value="A">A</option>
+				<option value="B">B</option>
+				<option value="C">C</option>
+				<option value="D">D</option>
+				<option value="E">E</option>
+			</select>
+			<div>
+			</div>
+		</div>
+	</center>
+</div>
+<div style="position: sticky;">
+<div style="display: inline-block; width: 49.693%;"><button id="save" class="btn btn-success">SAVE</button></div>
+<button id="delete" class="btn btn-danger">Delete this report card</button>
+</div>
+
+
+<script src="rep.js"></script>
+<script type="module">
+	// Import the functions you need from the SDKs you need
+	import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+	// TODO: Add SDKs for Firebase products that you want to use
+	// https://firebase.google.com/docs/web/setup#available-libraries
+  
+	// Your web app's Firebase configuration
+	const firebaseConfig = {
+	  apiKey: "AIzaSyCiCjNo7h8SBeIpy54_x5Fp9K4u2rYU68o",
+	  authDomain: "repcard-68a86.firebaseapp.com",
+	  projectId: "repcard-68a86",
+	  storageBucket: "repcard-68a86.appspot.com",
+	  messagingSenderId: "268606048540",
+	  appId: "1:268606048540:web:9fc7a08a01bc124f2e92d9"
+	};
+  
+	// Initialize Firebase
+	const app = initializeApp(firebaseConfig);
+
+	import{
+		getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField, getDocs
+	}
+	from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
+
+	const db = getFirestore();
+	//CODE MAIN//
+	var user_name = localStorage.getItem("userName");
+	var rep_name = localStorage.getItem("OpenedRep");
+	var dataAdded;
+
+	//code down//
+	check();	
+
+	//CODE SET//
+
+	let repNameBox = document.getElementById("repName");
+	var openedRep = localStorage.getItem("OpenedRep");
+	console.log(openedRep);
+
+	repNameBox.innerHTML = openedRep + "'s Report Card";
+	let saveBtn = document.getElementById("save");
+	let deleteBtn = document.getElementById("delete");
+	let grEng = document.getElementById("gradeEng");
+	let mrEng = document.getElementById("engMarks");
+
+	async function updateEng(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeEng: grEng.value,
+			marksEng: mrEng.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Eng marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grMaths = document.getElementById("gradeMaths");
+	let mrMaths = document.getElementById("mathsMarks");
+	async function updateMaths(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeMaths: grMaths.value,
+			marksMaths: mrMaths.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Maths marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grMFL = document.getElementById("gradeMFL");
+	let mrMFL = document.getElementById("MFLMarks");
+	async function updateMFL(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeMFL: grMFL.value,
+			marksMFL: mrMFL.value
+		}
+	)
+
+	.then(()=>{
+		console.log("MFL marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grHindi = document.getElementById("gradeHindi");
+	let mrHindi = document.getElementById("hindiMarks");
+	async function updateHindi(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeHindi: grHindi.value,
+			marksHindi: mrHindi.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Hindi marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grScience = document.getElementById("gradeScience");
+	let mrScience = document.getElementById("scienceMarks");
+	async function updateScience(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeScience: grScience.value,
+			marksScience: mrScience.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Science marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grHistory = document.getElementById("gradeHis");
+	let mrHistory = document.getElementById("hisMarks");
+	async function updateHistory(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeHistory: grHistory.value,
+			marksHistory: mrHistory.value
+		}
+	)
+
+	.then(()=>{
+		console.log("History marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grGeo = document.getElementById("gradeGeo");
+	let mrGeo = document.getElementById("geoMarks");
+	async function updateGeography(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeGeography: grGeo.value,
+			marksGeography: mrGeo.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Geo marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grTheory = document.getElementById("gradeTheory");
+	let mrTheory = document.getElementById("theoryMarks");
+	async function updateTheory(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradeTheory: grTheory.value,
+			marksTheory: mrTheory.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Theory marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	let grPractical = document.getElementById("gradePracticals");
+	let mrPractical = document.getElementById("practicalMarks");
+	async function updatePractical(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			gradePractical: grPractical.value,
+			marksPractical: mrPractical.value
+		}
+	)
+
+	.then(()=>{
+		console.log("Practical marks saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	async function dataAddedTrue(){
+		var ref = doc(db, user_name, rep_name);
+
+	await updateDoc(
+		ref, {
+			dataAdded: true
+		}
+	)
+
+	.then(()=>{
+		console.log("Data Added set to true");
+		alert("Data Saved");
+	})
+	.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+	}
+
+	async function save(){
+		updateEng();
+		updateGeography();
+		updateHindi();
+		updateMFL();
+		updateMaths();
+		updatePractical();
+		updateTheory();
+		updateScience();
+		updateHistory();
+		dataAddedTrue();
+	}
+
+	async function deleteRep(){
+		var ref = doc(db, user_name, rep_name);
+
+		if(confirm("Press ok to delete the report card. Be warned that this action is permanant.")){
+			await deleteDoc(ref)
+		.then(()=>{
+			alert("Report Card Deleted Successfully");
+		})
+		.catch((error)=>{
+		alert("Unsuccessful, error: " + error);
+	})
+			window.location = "rep_page.html";
+		}
+	}
+
+	async function confirmDelete(){
+		
+	}
+
+	async function check(){
+		var ref = doc(db, user_name, rep_name);
+
+		const docSnap = await getDoc(ref);
+		dataAdded = docSnap.data().dataAdded;
+
+		if(dataAdded == true){
+			load();
+		} else{
+			return;
+		}
+	}
+
+	async function load(){
+		var ref = doc(db, user_name, rep_name);
+		const docSnap = await getDoc(ref);
+
+		grEng.value = docSnap.data().gradeEng;
+		grMaths.value = docSnap.data().gradeMaths;
+		grMFL.value = docSnap.data().gradeMFL;
+		grHindi.value = docSnap.data().gradeHindi;
+		grScience.value = docSnap.data().gradeScience;
+		grHistory.value = docSnap.data().gradeHistory;
+		grGeo.value = docSnap.data().gradeGeography;
+		grTheory.value = docSnap.data().gradeTheory;
+		grPractical.value = docSnap.data().gradePractical;
+
+		mrEng.value = docSnap.data().marksEng;
+		mrMaths.value = docSnap.data().marksMaths;
+		mrMFL.value = docSnap.data().marksMFL;
+		mrHindi.value = docSnap.data().marksHindi;
+		mrScience.value = docSnap.data().marksScience;
+		mrHistory.value = docSnap.data().marksHistory;
+		mrGeo.value = docSnap.data().marksGeography;
+		mrTheory.value = docSnap.data().marksTheory;
+		mrPractical.value = docSnap.data().marksPractical;
+	}
+
+	saveBtn.addEventListener("click", save);
+	deleteBtn.addEventListener("click",  deleteRep);
+
+</script>
+</body>
+</html>
