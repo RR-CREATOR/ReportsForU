@@ -1,4 +1,4 @@
-Reports for U
+**Reports for U**
 
 This is an edtech app with the purpose of helping teens store their grades over the semesters and years so they can keep track of their progress. It also removes the hassle of having to keep/maintain either pictures or physical copies.
 
