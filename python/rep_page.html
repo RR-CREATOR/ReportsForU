@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Your Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="try.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Yeon Sung', sans-serif;
+            background-image: linear-gradient(to right, #33a0f1, #1b85cc, #126b9e, #075783, #01496b);
+            color: white;
+        }
+        .header {
+            color: white;
+            font-size: 36px;
+            letter-spacing: 5px;
+            margin-top: 60px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #roomButton {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        #roomButton:hover {
+            background-color: #218838;
+        }
+        #logout {
+            font-size: 18px;
+            float: right;
+            margin: 15px;
+            padding: 10px 20px;
+            color: white;
+            background-color: #ff4757;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        #logout:hover {
+            background-color: #e84142;
+        }
+        .room_name {
+            font-size: 20px;
+            color: white;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: center;
+        }
+        .room_name:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            color: white;
+        }
+        #room_name {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+        .copy_right_footer {
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            background-color: grey;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <button id="logout" onclick="logout()">Logout</button>
+    <div class="container">
+        <center>
+            <h1 class="header">Your Report Cards</h1>
+            <h3 id="user_name"></h3>
+            <div class="form-group">
+                <label>Add Report Card:</label>
+                <input type="text" id="room_name" class="form-control" placeholder="Enter Report Card Name">
+            </div>
+            <button id="roomButton" class="btn btn-success">Create</button>
+            <h3>ReportCards</h3>
+            <div id="output"></div>
+        </center>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
+        import {
+            getFirestore, doc, setDoc, collection, getDocs
+        } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXzf9mheeIVRSxDvEJKrWFapm9GdebwRo",
+            authDomain: "fir-datav9.firebaseapp.com",
+            projectId: "fir-datav9",
+            storageBucket: "fir-datav9.firebasestorage.app",
+            messagingSenderId: "388574706717",
+            appId: "1:388574706717:web:b5047e6544bf1cceac5af4"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore();
+
+        const user_name = localStorage.getItem("userName");
+        document.getElementById("user_name").innerHTML = `Welcome, ${user_name}!`;
+
+        const addBtn = document.getElementById("roomButton");
+        const output = document.getElementById("output");
+
+        const querySnapshot = await getDocs(collection(db, user_name));
+        querySnapshot.forEach((doc) => {
+            const roomDiv = `<div class='room_name' id='${doc.id}' onclick='redirectToRoomName("${doc.id}")'>${doc.id}</div>`;
+            output.innerHTML += roomDiv;
+        });
+
+        window.logout = function () {
+            localStorage.removeItem("userName");
+            window.location = "index.html";
+        };
+
+        async function addRoom() {
+            const roomName = document.getElementById("room_name").value;
+            if (!roomName.trim()) {
+                alert("Please enter a valid report card name.");
+                return;
+            }
+            const ref = doc(db, user_name, roomName);
+            await setDoc(ref, { dataAdded: false });
+            const roomDiv = `<div class='room_name' id='${roomName}' onclick='redirectToRoomName("${roomName}")'>${roomName}</div>`;
+            output.innerHTML += roomDiv;
+            document.getElementById("room_name").value = "";
+        }
+
+        addBtn.addEventListener("click", addRoom);
+    </script>
+</body>
+</html>
